@@ -23,9 +23,21 @@ const crearInputFileHtml = () => {
 
 };
 
+const eventos = () => {
+
+    inputFile.addEventListener( 'change', ( event ) => {
+
+        const file = event.target.files[ 0 ];
+        console.log(file)
+
+    });
+
+};
+
 
 export const init = () => {
     crearInputFileHtml();
+    eventos();
 };
 
 

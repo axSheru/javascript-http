@@ -1,5 +1,8 @@
 const jokesUrl = 'https://api.chucknorris.io/jokes/random';
 const urlUsuarios = 'https://reqres.in/api/users?page=2';
+const urlCloudinary = 'https://api.cloudinary.com/v1_1/axsheru/upload';
+
+const cloudPreset = 'k45rngiw';
 
 
 const obtenerChiste = async () => {
@@ -42,8 +45,37 @@ const obtenerUsuarios = async () => {
 
 };
 
+// Archivo es de tipo file.
+const subirImagen = async ( archivo ) => {
+
+    const formData = new FormData();
+    formData.append( 'upload_preset', cloudPreset );
+    formData.append( 'file', archivo );
+
+    try {
+
+        const resp = await fetch( urlCloudinary, {
+            method: 'POST',
+            body: formData,
+        });
+    
+        if ( ! resp.ok ) throw await resp.json();
+    
+        const cloudinaryResp = await resp.json();
+
+        return cloudinaryResp.secure_url;
+        
+    } catch ( err ) {
+
+        throw err;
+        
+    }
+
+};
+
 
 export {
     obtenerChiste,
     obtenerUsuarios,
+    subirImagen,
 };

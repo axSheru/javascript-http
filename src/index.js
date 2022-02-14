@@ -1,6 +1,11 @@
 /* import { init } from './js/usuarios-page';
 import { init } from './js/chistes-page'; */
-import * as CRUD from './js/crud-provider';
+
+import { init } from './js/archivos-page';
+
+init();
+
+/* import * as CRUD from './js/crud-provider';
 
 CRUD.getUsuario(2).then( console.log );
 
@@ -14,4 +19,4 @@ CRUD.actualizarUsuario( 2, {
     'job': 'Maestro'
 }).then( console.log );
 
-CRUD.eliminarUsuario( 2 ).then( console.log );
+CRUD.eliminarUsuario( 2 ).then( console.log ); */

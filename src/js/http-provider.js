@@ -46,30 +46,42 @@ const obtenerUsuarios = async () => {
 };
 
 // Archivo es de tipo file.
-const subirImagen = async ( archivo ) => {
+const subirImagen = async ( archivos ) => {
 
-    const formData = new FormData();
-    formData.append( 'upload_preset', cloudPreset );
-    formData.append( 'file', archivo );
+    let urls = [];
+    let index = 0;
 
-    try {
+    for (const archivo of archivos) {
 
-        const resp = await fetch( urlCloudinary, {
-            method: 'POST',
-            body: formData,
-        });
+        const formData = new FormData();
+        formData.append( 'upload_preset', cloudPreset );
+        formData.append( 'file', archivo );
     
-        if ( ! resp.ok ) throw await resp.json();
+        try {
     
-        const cloudinaryResp = await resp.json();
-
-        return cloudinaryResp.secure_url;
+            const resp = await fetch( urlCloudinary, {
+                method: 'POST',
+                body: formData,
+            });
         
-    } catch ( err ) {
-
-        throw err;
+            if ( ! resp.ok ) throw await resp.json();
         
+            const cloudinaryResp = await resp.json();
+
+            urls[index] = cloudinaryResp.secure_url;
+    
+            // return cloudinaryResp.secure_url;
+            
+        } catch ( err ) {
+    
+            // throw err;
+            
+        }
+
+        index++;
+
     }
+    return urls;
 
 };
 

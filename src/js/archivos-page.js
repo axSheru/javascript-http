@@ -10,7 +10,7 @@ const crearInputFileHtml = () => {
         <hr>
 
         <label>Selecciona una fotografía:</label>
-        <input type="file" accept="image/png, image/jpeg, image/jpg" />
+        <input type="file" accept="image/png, image/jpeg, image/jpg" multiple />
 
         <br />
         <img id="foto" class="img-thumbnail" src="" >
@@ -29,8 +29,8 @@ const eventos = () => {
 
     inputFile.addEventListener( 'change', ( event ) => {
 
-        const file = event.target.files[ 0 ];
-        subirImagen( file ).then( url => imgFoto.src = url );
+        const files = event.target.files;
+        subirImagen( files ).then( url => imgFoto.src = url );
 
     });
 
